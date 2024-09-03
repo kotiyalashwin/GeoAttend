@@ -16,6 +16,4 @@ route.post("/update", async (req, res) => {
   });
 });
 
-route.post("/calcDistance", async (req, res) => {});
-
 module.exports = route;

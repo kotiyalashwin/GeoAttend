@@ -1,11 +1,12 @@
 import React, { useState, use } from "react";
 import { useNavigate } from "react-router-dom";
+import NewUser from "../components/Newuser";
 import axios from "axios";
-import { Link } from "react-router-dom";
+
 import Navbar from "../components/Navbar";
+import Users from "../components/UsersLayout";
 
 export default function Admin() {
-  const navigate = useNavigate();
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
 
@@ -25,11 +26,10 @@ export default function Admin() {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleUpdate = async () => {
     if (latitude && longitude) {
       try {
-        await axios.post("http://localhost:3000/officelocation/set", {
+        await axios.post("http://localhost:3000/tracking/office/update", {
           latitude,
           longitude,
         });
@@ -44,20 +44,9 @@ export default function Admin() {
 
   return (
     <div className="w-full h-[100vh] bg-slate-200">
-      <Navbar onClick={getGeolocation} />
-      <h2>Set Office Location</h2>
-      <button onClick={getGeolocation}>Get Current Location</button>
-      {latitude && longitude && (
-        <div>
-          <p>Latitude: {latitude}</p>
-          <p>Longitude: {longitude}</p>
-        </div>
-      )}
-      <form onSubmit={handleSubmit}>
-        <button type="submit">Update Location</button>
-      </form>
-
-      <Link to={"/employee"}>EmployeeDashboard</Link>
+      <Navbar onClick={getGeolocation} update={handleUpdate} />
+      <NewUser />
+      <Users />
     </div>
   );
 }
