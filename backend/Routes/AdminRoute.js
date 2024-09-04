@@ -1,6 +1,7 @@
 const express = require("express");
 const { Employee } = require("../db");
 const route = express.Router();
+const calculateroute = require("./CalculateRoute");
 
 route.post("/add", async (req, res) => {
   const body = req.body;
@@ -34,5 +35,7 @@ route.get("/users", async (req, res) => {
     users,
   });
 });
+
+route.use("/getstatus", calculateroute);
 
 module.exports = route;

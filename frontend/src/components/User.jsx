@@ -2,6 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function User({ name, key }) {
   const navigate = useNavigate();
+
+  const handleGetStatus = () => {
+    navigate(`/status/${name}`);
+  };
   return (
     <div className="flex justify-between p-2 shadow-sm border rounded-md my-5 bg-white  ">
       <div className="flex items-center">
@@ -13,7 +17,10 @@ export default function User({ name, key }) {
         <p className="font-semibold text-black text-lg">{name}</p>
       </div>
       <div className="w-[15%] h-full flex justify-center items-center">
-        <button className="bg-blue-400 content-center p-2 text-xl">
+        <button
+          onClick={handleGetStatus}
+          className="bg-blue-400 content-center p-2 text-xl"
+        >
           Get Status
         </button>
       </div>

@@ -3,13 +3,23 @@ const { EmployeeLoc } = require("../db");
 const route = express.Router();
 
 route.post("/update", async (req, res) => {
-  const locationEmploye = req.body;
-  const locExist = await EmployeeLoc.findOne();
+  const { username, userlatitude, userlongitude } = req.body;
+  const locExist = await EmployeeLoc.findOne({ name: username });
 
   if (!locExist) {
-    await EmployeeLoc.create(locationEmploye);
+    await EmployeeLoc.create({
+      name: username,
+      latitude: userlatitude,
+      longitude: userlongitude,
+    });
   } else {
-    await EmployeeLoc.updateOne(locationEmploye);
+    await EmployeeLoc.findOneAndUpdate(
+      { name: username },
+      {
+        latitude: userlatitude,
+        longitude: userlongitude,
+      }
+    );
   }
   res.json({
     message: "reached update location",

@@ -13,14 +13,14 @@ const employeeSchema = new mongoose.Schema({
   name: String,
   checkInTime: { type: String, default: null },
   checkOutTime: { type: String, default: null },
-  status: { type: String, enum: ["check-in", "check-out"] },
+  status: { type: String, default: "check-out" },
   workingHours: Number,
 });
 
 const employeeLocSchema = new mongoose.Schema({
   name: String,
   latitude: Number,
-  longitutde: Number,
+  longitude: Number,
 });
 
 const Employee = mongoose.model("Employee", employeeSchema);
