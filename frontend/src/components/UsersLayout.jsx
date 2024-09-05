@@ -8,7 +8,7 @@ export default function Users() {
 
   useEffect(() => {
     async function getusers() {
-      const response = await axios.get("http://localhost:3000/admin/users");
+      const response = await axios.get(" http://localhost:3000/admin/users");
       setUsers(response.data.users);
     }
 

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Navbar from "./Navbar";
 
 export default function EmployeeStatus() {
   const { name } = useParams();
-  const [status, setStatus] = useState("");
+  const [result, setStatus] = useState({});
 
   useEffect(() => {
     async function getStatus() {
@@ -23,8 +24,8 @@ export default function EmployeeStatus() {
   }, [name]);
 
   return (
-    <div className="flex  flex-col justify-center items-center space-y-4 p-4 w-full">
-      {status === "check-in" ? (
+    <div className="flex flex-col  justify-evenly items-center space-y-4 p-2 w-full">
+      {result.status === "check-in" ? (
         <div className="bg-green-500 text-white font-semibold py-4 px-6 rounded-md shadow-md flex justify-center items-center cursor-pointer hover:bg-green-600">
           Check-in
         </div>
@@ -34,10 +35,10 @@ export default function EmployeeStatus() {
         </div>
       )}
 
-      {status === "check-in" ? (
-        <p>{`${name} is Present`}</p>
+      {result.status === "check-in" ? (
+        <p className="bg-orange-400 text-white p-4 rounded-lg">{`${name} is Present`}</p>
       ) : (
-        <p>{`${name} is Absent`}</p>
+        <p className="bg-purple-300 text-black p-4 rounded-lg">{`${name} is Absent`}</p>
       )}
     </div>
   );

@@ -11,8 +11,8 @@ const officeLocSchema = new mongoose.Schema({
 
 const employeeSchema = new mongoose.Schema({
   name: String,
-  checkInTime: { type: String, default: null },
-  checkOutTime: { type: String, default: null },
+  checkInTime: { type: String, default: [] },
+  checkOutTime: { type: String, default: [] },
   status: { type: String, default: "check-out" },
   workingHours: Number,
 });

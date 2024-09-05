@@ -32,9 +32,9 @@ route.get("/status/:name", async (req, res) => {
       OFFICE_LONGITUDE
     );
     console.log(distance);
+    const employee = await Employee.findOne({ name: name });
 
     if (distance <= RADIUS) {
-      //add pairing login
       await Employee.findOneAndUpdate(
         { name: name },
         {
@@ -52,11 +52,17 @@ route.get("/status/:name", async (req, res) => {
       );
     }
 
-    const employee = await Employee.findOne({ name: name });
-    const status = employee.status;
+    const employeeUp = await Employee.findOne({ name: name });
+    const status = employeeUp.status;
+    const checkInTime = employeeUp.checkInTime;
+    const checkOutTime = employeeUp.checkOutTime;
 
     res.json({
-      result: status,
+      result: {
+        status,
+        checkInTime,
+        checkOutTime,
+      },
     });
   } catch (err) {
     // const now = new Date().toLocaleTimeString();
