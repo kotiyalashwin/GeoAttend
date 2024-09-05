@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config({ path: "../.env" });
+const url = process.env.MONGO_URL;
 
-mongoose.connect(
-  "mongodb+srv://ashwinkotiyal07:hxXYvn6CzGPJYwGK@cluster0.p1a59.mongodb.net/GeoAttend"
-);
+mongoose.connect(`${url}`);
 
 const officeLocSchema = new mongoose.Schema({
   latitude: Number,

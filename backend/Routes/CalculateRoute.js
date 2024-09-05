@@ -4,7 +4,7 @@ const express = require("express");
 const route = express.Router();
 
 route.get("/status/:name", async (req, res) => {
-  const RADIUS = 20000;
+  const RADIUS = 2000;
   const { name } = req.params;
   try {
     const employeeExist = await EmployeeLoc.findOne({ name: name });
